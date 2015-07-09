@@ -1,108 +1,620 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>FsReveal
-</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="FsReveal parses markdown or F# script file and generate reveal.js slides."/>
-    <meta name="author" content="Karlkim Suwanmongkol"/>
-
-    <script src="https://code.jquery.com/jquery-1.8.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet"/>
-
-    <link type="text/css" rel="stylesheet" href="./content/style.css" />
-    <script type="text/javascript" src="./content/tips.js"></script>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<head>
+    <meta charset="utf-8">
+    <title>TalBot</title>
+    <meta name="description" content="Introduction to TalBot">
+    <meta name="author" content="Mike Talbott">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="//code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="//code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/blood.css" id="theme">
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/style.css" />
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/deedle.css" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" />
+    <script src="fsharp.formatting/styles/tips.js" type="text/javascript"></script>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/fsreveal.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+    </script>
     <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <div class="container">
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://fsharp.org">fsharp.org</a></li>
-          <li><a href="http://github.com/fsprojects/FsReveal">github page</a></li>
-        </ul>
-        <h3 class="muted"><a href="./index.html">FsReveal</a></h3>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="span9" id="main">
-          
-<h1><a name="FsReveal" class="anchor" href="#FsReveal">FsReveal</a></h1>
+    <script language="javascript" type="text/javascript">
+        function init()
+        {
+            websocket = new WebSocket("ws://localhost:8083/websocket");
+            websocket.onmessage = function(evt) { location.reload(); };
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        <div class="tip" id="fs1">Multiple items<br />type SamplePlugin =<br />&#160;&#160;interface obj<br />&#160;&#160;new : unit -&gt; SamplePlugin<br />&#160;&#160;override Run : unit -&gt; &#39;a<br /><br />Full name: index.SamplePlugin<br /><br />--------------------<br />new : unit -&gt; SamplePlugin</div>
+<div class="tip" id="fs2">val x : SamplePlugin</div>
+<div class="tip" id="fs3">override SamplePlugin.Run : unit -&gt; &#39;a<br /><br />Full name: index.SamplePlugin.Run</div>
+<div class="tip" id="fs4">val slackConfig : obj<br /><br />Full name: index.slackConfig</div>
+<div class="tip" id="fs5">val bot : obj<br /><br />Full name: index.bot</div>
+<div class="tip" id="fs6">val botNotifier : unit -&gt; Async&lt;unit&gt;<br /><br />Full name: index.botNotifier</div>
+<div class="tip" id="fs7">val async : AsyncBuilder<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.async</div>
+<div class="tip" id="fs8">Multiple items<br />type Async<br />static member AsBeginEnd : computation:(&#39;Arg -&gt; Async&lt;&#39;T&gt;) -&gt; (&#39;Arg * AsyncCallback * obj -&gt; IAsyncResult) * (IAsyncResult -&gt; &#39;T) * (IAsyncResult -&gt; unit)<br />static member AwaitEvent : event:IEvent&lt;&#39;Del,&#39;T&gt; * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt; (requires delegate and &#39;Del :&gt; Delegate)<br />static member AwaitIAsyncResult : iar:IAsyncResult * ?millisecondsTimeout:int -&gt; Async&lt;bool&gt;<br />static member AwaitTask : task:Task&lt;&#39;T&gt; -&gt; Async&lt;&#39;T&gt;<br />static member AwaitWaitHandle : waitHandle:WaitHandle * ?millisecondsTimeout:int -&gt; Async&lt;bool&gt;<br />static member CancelDefaultToken : unit -&gt; unit<br />static member Catch : computation:Async&lt;&#39;T&gt; -&gt; Async&lt;Choice&lt;&#39;T,exn&gt;&gt;<br />static member FromBeginEnd : beginAction:(AsyncCallback * obj -&gt; IAsyncResult) * endAction:(IAsyncResult -&gt; &#39;T) * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />static member FromBeginEnd : arg:&#39;Arg1 * beginAction:(&#39;Arg1 * AsyncCallback * obj -&gt; IAsyncResult) * endAction:(IAsyncResult -&gt; &#39;T) * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />static member FromBeginEnd : arg1:&#39;Arg1 * arg2:&#39;Arg2 * beginAction:(&#39;Arg1 * &#39;Arg2 * AsyncCallback * obj -&gt; IAsyncResult) * endAction:(IAsyncResult -&gt; &#39;T) * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />static member FromBeginEnd : arg1:&#39;Arg1 * arg2:&#39;Arg2 * arg3:&#39;Arg3 * beginAction:(&#39;Arg1 * &#39;Arg2 * &#39;Arg3 * AsyncCallback * obj -&gt; IAsyncResult) * endAction:(IAsyncResult -&gt; &#39;T) * ?cancelAction:(unit -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />static member FromContinuations : callback:((&#39;T -&gt; unit) * (exn -&gt; unit) * (OperationCanceledException -&gt; unit) -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />static member Ignore : computation:Async&lt;&#39;T&gt; -&gt; Async&lt;unit&gt;<br />static member OnCancel : interruption:(unit -&gt; unit) -&gt; Async&lt;IDisposable&gt;<br />static member Parallel : computations:seq&lt;Async&lt;&#39;T&gt;&gt; -&gt; Async&lt;&#39;T []&gt;<br />static member RunSynchronously : computation:Async&lt;&#39;T&gt; * ?timeout:int * ?cancellationToken:CancellationToken -&gt; &#39;T<br />static member Sleep : millisecondsDueTime:int -&gt; Async&lt;unit&gt;<br />static member Start : computation:Async&lt;unit&gt; * ?cancellationToken:CancellationToken -&gt; unit<br />static member StartAsTask : computation:Async&lt;&#39;T&gt; * ?taskCreationOptions:TaskCreationOptions * ?cancellationToken:CancellationToken -&gt; Task&lt;&#39;T&gt;<br />static member StartChild : computation:Async&lt;&#39;T&gt; * ?millisecondsTimeout:int -&gt; Async&lt;Async&lt;&#39;T&gt;&gt;<br />static member StartChildAsTask : computation:Async&lt;&#39;T&gt; * ?taskCreationOptions:TaskCreationOptions -&gt; Async&lt;Task&lt;&#39;T&gt;&gt;<br />static member StartImmediate : computation:Async&lt;unit&gt; * ?cancellationToken:CancellationToken -&gt; unit<br />static member StartWithContinuations : computation:Async&lt;&#39;T&gt; * continuation:(&#39;T -&gt; unit) * exceptionContinuation:(exn -&gt; unit) * cancellationContinuation:(OperationCanceledException -&gt; unit) * ?cancellationToken:CancellationToken -&gt; unit<br />static member SwitchToContext : syncContext:SynchronizationContext -&gt; Async&lt;unit&gt;<br />static member SwitchToNewThread : unit -&gt; Async&lt;unit&gt;<br />static member SwitchToThreadPool : unit -&gt; Async&lt;unit&gt;<br />static member TryCancelled : computation:Async&lt;&#39;T&gt; * compensation:(OperationCanceledException -&gt; unit) -&gt; Async&lt;&#39;T&gt;<br />static member CancellationToken : Async&lt;CancellationToken&gt;<br />static member DefaultCancellationToken : CancellationToken<br /><br />Full name: Microsoft.FSharp.Control.Async<br /><br />--------------------<br />type Async&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Control.Async&lt;_&gt;</div>
+<div class="tip" id="fs9">static member Async.Sleep : millisecondsDueTime:int -&gt; Async&lt;unit&gt;</div>
+<div class="tip" id="fs10">static member Async.Start : computation:Async&lt;unit&gt; * ?cancellationToken:System.Threading.CancellationToken -&gt; unit</div>
+<div class="tip" id="fs11">val notifications : obj<br /><br />Full name: index.notifications</div>
+<div class="tip" id="fs12">val groupedNotifications : (obj * obj) list<br /><br />Full name: index.groupedNotifications</div>
+<div class="tip" id="fs13">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>
+<div class="tip" id="fs14">val postAndLog : sender:&#39;a * notifications:&#39;b -&gt; &#39;c<br /><br />Full name: index.postAndLog</div>
+<div class="tip" id="fs15">val sender : &#39;a</div>
+<div class="tip" id="fs16">val notifications : &#39;b</div>
+<div class="tip" id="fs17">val postNewMessagesToSlack : (&#39;a * &#39;b -&gt; unit)</div>
+<div class="tip" id="fs18">val iter : action:(&#39;T -&gt; unit) -&gt; list:&#39;T list -&gt; unit<br /><br />Full name: Microsoft.FSharp.Collections.List.iter</div>
 
-<p>FsReveal allows you to write beautiful slides in Markdown and brings C# and F# to the <a href="https://github.com/hakimel/reveal.js/" title="reveal.js | HTML presentations made easy">reveal.js</a> web presentation framework.</p>
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section data-background="images/hal3.jpg">
 
-<p><img src="img/liveupdate.gif" alt="Automatically updates the browser in edit mode on every save" /></p>
+</section>
 
-<h2><a name="Features" class="anchor" href="#Features">Features</a></h2>
+<section data-background="images/hal3.jpg">
+
+<h3>TalBot</h3>
+
+<h4>Slacking on F#</h4>
+
+<aside class="notes">
+Hello. This will be a presentation about my experiences learning F# while building TalBot, a slack bot.<br/>
+I'll make my slides available after the presentation and will post a message in slack with a link when they are ready.<br/>
+</aside>
+
+</section>
+
+<section >
+
+<h3>Why TalBot</h3>
 
 <ul>
-<li>Write your slides in <a href="formatting.html">Markdown</a> or .fsx files</li>
-<li>Automatically updates the browser in edit mode on every save</li>
-<li>Syntax highlighting for most programming languages including C#, F# and LaTeX</li>
-<li>Speaker notes; Shows the current slide, next slide, elapsed time and current time</li>
-<li>Built in themes</li>
-<li>Horizontal and vertical slides</li>
-<li>Built in slide transitions using CSS 3D transforms</li>
-<li>Slide overview</li>
-<li>Works on mobile browsers. Swipe your way through the presentation.</li>
+<li>Level up</li>
+<li>Provide value</li>
+<li>Have an adventure</li>
 </ul>
 
-<h2><a name="Getting-started" class="anchor" href="#Getting-started">Getting started</a></h2>
+<aside class="notes">
+TalBot has been a tool for leveling up my skills.<br/>
+It is a simple project to experiment with new concepts and different ways of thinking.<br/>
+Through it I've learned more than just functional programming and F#.<br/>
+I've also experienced and learned about several other technologies and concepts that were not part of my original agenda.<br/>
+One of my goals has been for TalBot to be something that provides value to the team via status notifications & jira links<br/>
+I'm also hoping to spark some contributions that will provide other useful or just fun features.<br/>
+So far the experience has been an adventure.<br/>
+Azure websites, Azure Service Bus, Designing Distributed systems, Web Sockets, OAuth, the Actor model, Asynchronous operations, and Windows Services.<br/>
+</aside>
+
+</section>
+
+<section >
+
+<h3>Why Functional</h3>
 
 <ul>
-<li>Read the <a href="getting-started.html">getting started tutorial</a></li>
-<li>Checkout the <a href="formatting.html">formatting docs</a> to learn how to style your slides.</li>
+<li>Uncle Bob
+<ul>
+<li><a href="https://vimeo.com/97514630">The Failure of State.</a></li>
+</ul></li>
+<li>Scott Wlaschin
+<ul>
+<li><a href="https://vimeo.com/channels/c4fsharp/97507575">Domain modeling with the F# type system</a></li>
+<li><a href="https://vimeo.com/97344498">Railway Oriented Programming</a></li>
+</ul></li>
 </ul>
 
-<h2><a name="Examples" class="anchor" href="#Examples">Examples</a></h2>
+<aside class="notes">
+There's a case to be made for the advantages of a functional programming style. I won't specifically address that today.<br/>
+But, if you're interested, here are a few good presentations.<br/>
+</aside>
 
-<p>Check out what others have created. Submit a PR if you have something to add to the list.</p>
+</section>
+
+<section >
+
+<h3>Why F#</h3>
 
 <ul>
-<li><a href="http://kimsk.github.io/fsreveal-sample-md/FsReveal.html#/" title="Markdown example">Markdown example</a> by <a href="https://twitter.com/kimsk" title="@kimsk on Twitter">@kimsk</a> <a href="https://github.com/kimsk/fsreveal-sample-md/blob/master/slides/FsReveal.md" title="Markdown example source">(source)</a></li>
-<li><a href="http://kimsk.github.io/fsreveal-sample-fsx/FsReveal.html#/" title=".fsx example">.fsx example</a> by <a href="https://twitter.com/kimsk" title="@kimsk on Twitter">@kimsk</a> <a href="https://github.com/kimsk/fsreveal-sample-fsx/blob/master/slides/FsReveal.fsx" title=".fsx example source">(source)</a></li>
-<li><a href="http://forki.github.io/PaketIntro/">Paket - Intro</a> by <a href="https://twitter.com/sforkmann" title="@sforkmann on Twitter">@sforkmann</a> <a href="https://github.com/forki/PaketIntro/blob/master/slides/index.md">(source)</a></li>
-<li><a href="http://forki.github.io/FAKE.Intro/">FAKE - Intro</a> by <a href="https://twitter.com/sforkmann" title="@sforkmann on Twitter">@sforkmann</a> <a href="https://github.com/forki/FAKE.Intro/blob/master/slides/index.md">(source)</a></li>
-<li><a href="http://troykershaw.github.io/RpgFsharpWorkshop" title="RPG F# Workshop">RPG F# Workshop</a> by <a href="https://twitter.com/troykershaw" title="@troykershaw on Twitter">@troykershaw</a> <a href="https://github.com/troykershaw/RpgFsharpWorkshop" title="RPG F# Workshop source">(source)</a></li>
-<li><a href="http://panesofglass.github.io/TodoBackendFSharp" title="F# on the Web - 0 to production in 12 weeks">F# on the Web - 0 to production in 12 weeks</a> by <a href="https://twitter.com/panesofglass" title="@panesofglass on Twitter">@panesofglass</a> <a href="https://github.com/panesofglass/TodoBackendFSharp" title="F# on the Web source">(source)</a></li>
+<li>Reduces time to market</li>
+<li>Correctness (fewer bugs)</li>
+<li>Simplifies complex problems</li>
+<li>Scales well</li>
 </ul>
 
-<p>More samples can be found in the <a href="http://fsprojects.github.io/FsReveal/formatting.html">formatting docs</a>.</p>
+<blockquote>
+  <p>Tomas Petricek - <a href="https://channel9.msdn.com/Blogs/Seth-Juarez/Making-the-Case-for-using-F-with-Tomas-Petricek">Making the case for F#</a></p>
+</blockquote>
 
-<h2><a name="Contributing-and-copyright" class="anchor" href="#Contributing-and-copyright">Contributing and copyright</a></h2>
+<aside class="notes">
+As with functional programming, others make the case better than I could about why to use F#.<br/>
+These are a few of the characteristics that are used to promote the language.<br/>
+These characteristics aren't exclusive to F# but they are some of it's strengths.<br/>
+I won't go into detail now, but Tomas can explain more or we can talk later if you're interested.<br/>
+-REPL (Read - eval - print loop) Interactive prototyping that can be turned into unit tests, type providers<br/>
+-Correct fewer bugs You can use the domain model to ensure valid state (discriminated unions, pattern matching, units of measure, absence of null)<br/>
+-Manage complexity to handle more complex problems (type inference - similar to how var infers local variables, but not limited to the local scope, immutability)<br/>
+-Scales well (concurrency & parallelism)<br/>
+</aside>
 
-<p>The project is hosted on <a href="https://github.com/fsprojects/FsReveal">GitHub</a> where you can <a href="https://github.com/fsprojects/FsReveal/issues">report issues</a>, fork 
-the project and submit pull requests on the develop branch. If you're adding new public API, please also 
-consider adding <a href="https://github.com/fsprojects/FsReveal/tree/develop/docs/content">samples</a> that can be turned into a documentation. You might
-also want to read <a href="https://github.com/fsprojects/FsReveal/blob/develop/README.md">library design notes</a> to understand how it works.</p>
+</section>
 
-<p>The library is available under MIT license, which allows modification and 
-redistribution for both commercial and non-commercial purposes. For more information see the 
-<a href="https://github.com/fsprojects/FsReveal/blob/develop/LICENSE.txt">License file</a> in the GitHub repository.</p>
+<section >
+
+<h3>Why I tried F#</h3>
+
+<ul>
+<li>Hybrid language</li>
+<li>.Net interoperability</li>
+<li>To write better C#
+<aside class="notes">
+I chose to learn F# because I felt it would have a lower barrier to entry than a different functional language on an unfamiliar stack.<br/>
+It is a hybrid language that is functional first but also supports an object oriented approach. It also includes .Net interoperability, <br/>
+Most of all I had heard that learning F# would help me write better C# on a day to day basis.<br/>
+</aside></li>
+</ul>
+
+</section>
+
+<section >
+
+<h3>What I like about F#</h3>
+
+<ul>
+<li>Community</li>
+<li>Syntax</li>
+<li>Composability
+<aside class="notes">
+One great thing about F# is the community. There's great support on slack, twitter, etc.<br/>
+After getting past the initial unfamiliarity the syntax is simple.<br/>
+After a bit the language starts to feel natural and just flow.<br/>
+I think this is largely because of the ability to easily break functions into smaller pieces and to pass functions around.<br/>
+</aside></li>
+</ul>
+
+</section>
+
+<section >
+
+<section >
+
+<h3>Challenges</h3>
+
+<p><img src="images/Monitor-Throw.gif" alt="" />
+<aside class="notes">
+There have been some challenges and moments of frustration along the way.<br/>
+</aside></p>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>F# Examples</h3>
+
+<aside class="notes">
+When I first started learning, the concepts were exciting but the examples weren't clicking for me.<br/>
+Many were not relatable and too mathematics focused.<br/>
+I found myself hung up on wanting to understand how the concepts applied to the world where we work.<br/>
+Before long, I had to divert my attention from just studying and needed to find something simple and tangible build.<br/>
+</aside>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>Privacy</h3>
+
+<p><img src="images/privacy.gif" alt="" />
+<aside class="notes">
+Another challenge was how to simultaneously make the project <br/>
+- Open source where I could get community feedback and potentially contributions<br/>
+- Yet practical to implement in our environment without compromising private information.<br/>
+These challenges were addressed by implementing a plugin model to enable extended functionality specific to work.<br/>
+</aside></p>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>GitHub Anxiety</h3>
+
+<aside class="notes">
+A personal challenge to overcome was social anxiety related to sharing my code publicly.<br/>
+However, I realised that, if I wanted to get input from the F# community the code had to be open source and publicly available.<br/>
+</aside>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h3>Fails</h3>
+
+<p><img src="images/fail.gif" alt="" />
+<aside class="notes">
+Part of the anxiety comes from the fear of failure and particularly public failure.<br/>
+So in the spirit of facing fears and openness, here are a few of my fails...<br/>
+</aside></p>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>Starting</h3>
+
+<aside class="notes">
+One implementation of the bot runs as a windows service. <br/>
+I learned the hard way that having a long running process in the OnStart method of a windows service prevents the service from transitioning out of a starting state.<br/>
+It is obvious in hindsight, but was an issue I had to sleep on before it clicked.<br/>
+</aside>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>Recursion</h3>
+
+<p><img src="images/recursion.gif" alt="" />
+<aside class="notes">
+Bots that talk to themselves NEVER SHUT UP. Thankfully Slack throttles API access if post frequency exceeds a threshold.<br/>
+I learned this one while testing one of my early implementations.<br/>
+</aside></p>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>Spam</h3>
+
+<aside class="notes">
+Some fails are less dramatic and you don't experience them until you have had some success. <br/>
+For example figuring out how to get the bot to listen to messages without being called by keyword was a mini success.<br/>
+However, it also resulted in TalBot being overly chatty and annoying to some users.<br/>
+</aside>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h3>Wins</h3>
+
+<aside class="notes">
+Thankfully it's not all fails. Here are some of the wins that make it worthwhile.<br/>
+</aside>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>Community</h3>
+
+<p><img src="images/helpful.gif" alt="Great community" />
+<aside class="notes">
+Pushing past some of the social anxiety and finding a helpful community has been a win.<br/>
+By making my work public, asking questions on the F# slack channel, and logging issues on other open source projects I've found some great help.<br/>
+The F# community is enthusiastic about the language and welcoming to new recruits.<br/>
+In one case I logged an issue against another F# project that is a dependency for TalBot.<br/>
+The project owner helped even though the issue was actually a mistake in my project.<br/>
+</aside></p>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>Satisfaction</h3>
+
+<aside class="notes">
+Satisfaction of seeing results and learning along the way is another win.<br/>
+We all experience this one when we look back at something we've built or a challenge we've overcome.<br/>
+It's part of why I love what we do.<br/>
+</aside>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>Approval</h3>
+
+<p><img src="images/approval.gif" alt="Great community" />
+<aside class="notes">
+Of course it's all the more satisfying to receive acknowledgement from peers and the people you're building for.<br/>
+</aside></p>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h3>Plugins</h3>
+
+<p><a href="http://petyr.harriscomputer.com/users/h80204/repos/talbotplugins/browse">TalBotPlugins</a> on Stash
+<aside class="notes">
+For those that might be interested in using or contributing to TalBot<br/>
+There are a few options.<br/>
+Plugins are for functionality that doesn't belong in the Open Source repo. Typically this would be for something that's work specific.<br/>
+Current examples are the notifications of SmartFusion releases, and notifications of Sync Agent status for MGH and ESS.<br/>
+Plugins are your assemblies that implement the TalBot interface (available via NuGet).<br/>
+There are two plugin interfaces. One for notifications and one for message responses.<br/>
+There are some existing plugins in the repo on stash. HLG R&amp;D users should have access to clone and submit pull requests.<br/>
+</aside></p>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h4>C#</h4>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="cs"><span class="k">public</span> <span class="k">class</span> SamplePlugin <span class="o">:</span> INotificationPlugin
+{
+    <span class="k">public</span> IEnumerable&lt;OutgoingMessage&gt; Run()
+    {
+        <span class="k">var</span> message <span class="o">=</span> <span class="k">new</span> OutgoingMessage
+            {
+                Destination <span class="o">=</span> <span class="s">"#general"</span>,
+                Sender <span class="o">=</span> <span class="s">"TalBot"</span>,
+                Text <span class="o">=</span> <span class="s">"Hello from C# sample."</span>,
+                Icon <span class="o">=</span> <span class="s">":c3po:"</span>
+            );
+        <span class="k">return</span> <span class="k">new</span> OutgoingMessage[] { message };
+    }
+}
+</code></pre></td></tr></table>
+
+<aside class="notes">
+Here is a C# hello world example of a the INotificationPlugin interface.<br/>
+It is a single method that when called returns a collection of outgoing messages.<br/>
+</aside>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h4>F#</h4>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="t">SamplePlugin</span>() <span class="o">=</span>
+    <span class="k">interface</span> <span class="i">INotificationPlugin</span> <span class="k">with</span>
+        <span class="k">member</span> <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">x</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="f">Run</span>()<span class="o">:</span> <span class="i">IEnumerable</span><span class="o">&lt;</span><span class="i">OutgoingMessage</span><span class="o">&gt;</span> <span class="o">=</span> 
+            {
+                <span class="i">OutgoingMessage</span><span class="o">.</span><span class="i">destination</span><span class="o">=</span><span class="s">&quot;#general&quot;</span>;
+                <span class="i">sender</span><span class="o">=</span><span class="s">&quot;TalBot&quot;</span>;
+                <span class="i">text</span><span class="o">=</span><span class="s">&quot;Hello from #F sample.&quot;</span>;
+                <span class="i">icon</span><span class="o">=</span><span class="s">&quot;:c3po:&quot;</span>;
+            }
+</code></pre></td>
+</tr>
+</table>
+
+<aside class="notes">
+Here is an F# example of the same thing.<br/>
+</aside>
+
+</section>
+
+</section>
+
+<section >
+
+<section >
+
+<h3>Library</h3>
+
+<ul>
+<li>High level - Bots</li>
+<li>Granular - Bot components
+<aside class="notes">
+Another option is to create your own scripts or applications using the TalBot library available via NuGet.<br/>
+There are two levels of abstraction. Bots and Bot components.<br/>
+</aside></li>
+</ul>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>F# bot</h3>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="i">TalBot</span>
+<span class="k">open</span> <span class="i">Configuration</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="i">slackConfig</span> <span class="o">=</span> <span class="i">Configuration</span><span class="o">.</span><span class="i">slackConfiguration</span> ()
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">bot</span> <span class="o">=</span> <span class="i">Bot</span>(<span onmouseout="hideTip(event, 'fs4', 6)" onmouseover="showTip(event, 'fs4', 6)" class="i">slackConfig</span>)
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="f">botNotifier</span> () <span class="o">=</span> <span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="i">async</span> {
+    <span class="k">while</span> <span class="k">true</span> <span class="k">do</span>
+        <span onmouseout="hideTip(event, 'fs5', 9)" onmouseover="showTip(event, 'fs5', 9)" class="i">bot</span><span class="o">.</span><span class="i">Speak</span> ()
+        <span class="k">do!</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="t">Async</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="f">Sleep</span> <span class="n">3600000</span>
+}
+
+<span onmouseout="hideTip(event, 'fs8', 12)" onmouseover="showTip(event, 'fs8', 12)" class="t">Async</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs10', 13)" onmouseover="showTip(event, 'fs10', 13)" class="f">Start</span>(<span onmouseout="hideTip(event, 'fs6', 14)" onmouseover="showTip(event, 'fs6', 14)" class="f">botNotifier</span> (), <span class="i">cancellationSource</span><span class="o">.</span><span class="i">Token</span>)
+</code></pre></td>
+</tr>
+</table>
+
+<aside class="notes">
+This is a sample of instantiating a bot and calling the Speak member which runs any available notification plugins.<br/>
+There are additional bot methods for doing things like listening to webhooks from slack, posting to and reading from a service bus queue, listening to slack with webhooks, responding to incoming messages, and logging exceptions to a slack channel.<br/>
+</aside>
+
+</section>
+
+<section author="Mike Talbott" description="Introduction to TalBot" theme="blood" title="TalBot" transition="default">
+
+<h3>F# component</h3>
+
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="i">TalBot</span>
+<span class="k">open</span> <span class="i">Configuration</span>
+<span class="k">open</span> <span class="i">BotHelper</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 15)" onmouseover="showTip(event, 'fs11', 15)" class="i">notifications</span> <span class="o">=</span> <span class="i">Notifier</span><span class="o">.</span><span class="i">getNotifications</span> ()
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs12', 16)" onmouseover="showTip(event, 'fs12', 16)" class="i">groupedNotifications</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs11', 17)" onmouseover="showTip(event, 'fs11', 17)" class="i">notifications</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 18)" onmouseover="showTip(event, 'fs13', 18)" class="i">List</span><span class="o">.</span><span class="i">groupBy</span> (<span class="k">fun</span> <span class="i">x</span> <span class="k">-&gt;</span> <span class="i">x</span><span class="o">.</span><span class="i">sender</span>)
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs14', 19)" onmouseover="showTip(event, 'fs14', 19)" class="f">postAndLog</span> (<span onmouseout="hideTip(event, 'fs15', 20)" onmouseover="showTip(event, 'fs15', 20)" class="i">sender</span>,<span onmouseout="hideTip(event, 'fs16', 21)" onmouseover="showTip(event, 'fs16', 21)" class="i">notifications</span>) <span class="o">=</span> 
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="f">postNewMessagesToSlack</span> <span class="o">=</span> <span class="i">postNewMessages</span> <span class="i">Configuration</span><span class="o">.</span><span class="i">SlackUri</span>
+    <span onmouseout="hideTip(event, 'fs17', 23)" onmouseover="showTip(event, 'fs17', 23)" class="f">postNewMessagesToSlack</span> (<span onmouseout="hideTip(event, 'fs15', 24)" onmouseover="showTip(event, 'fs15', 24)" class="i">sender</span>,<span onmouseout="hideTip(event, 'fs16', 25)" onmouseover="showTip(event, 'fs16', 25)" class="i">notifications</span>)
+    <span class="i">saveMessagesToLog</span> (<span onmouseout="hideTip(event, 'fs15', 26)" onmouseover="showTip(event, 'fs15', 26)" class="i">sender</span>,<span onmouseout="hideTip(event, 'fs16', 27)" onmouseover="showTip(event, 'fs16', 27)" class="i">notifications</span>)
+
+<span onmouseout="hideTip(event, 'fs12', 28)" onmouseover="showTip(event, 'fs12', 28)" class="i">groupedNotifications</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs13', 29)" onmouseover="showTip(event, 'fs13', 29)" class="t">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 30)" onmouseover="showTip(event, 'fs18', 30)" class="f">iter</span> <span onmouseout="hideTip(event, 'fs14', 31)" onmouseover="showTip(event, 'fs14', 31)" class="f">postAndLog</span>
+</code></pre></td>
+</tr>
+</table>
+
+<aside class="notes">
+This is an example of a bot component. This level of abstraction provides more granular control. A bot is made up of multiple of these components, but the components can be used on their own.<br/>
+</aside>
+
+</section>
+
+</section>
+
+<section >
+
+<h3>TalBot</h3>
+
+<h4>you can...</h4>
+
+<ul>
+<li>Clone it <a href="https://github.com/talbottmike/TalBot">GitHub</a></li>
+<li>Learn about it <a href="http://talbottmike.github.io/TalBot/">GitHub.io</a></li>
+<li>Use it <a href="https://www.nuget.org/packages/TalBot">NuGet</a></li>
+</ul>
+
+<aside class="notes">
+Finally you can use TalBot by cloning the repo, tweaking it and deploying your own flavor.<br/>
+</aside>
+
+</section>
+
+<section >
+
+<h4>... one last thing.</h4>
+
+<aside class="notes">
+One last challenge and another thing you get to practice when working on side projects is deciding what to prioritize. <br/>
+Recently that meant addressing TalBot's chattyness and not focusing on updating the documentation.<br/>
+So the documentation resources available today need some updating.<br/>
+Thanks for listening and pull requests are welcome.<br/>
+</aside>
+
+</section>
+
 
 
         </div>
-        <div class="span3">
-          <img src="./img/logo-2.png" alt="F# Project" style="width:150px;margin:10px" />  
-          <ul class="nav nav-list" id="menu" style="margin-top: 20px;">
-            <li class="nav-header">FsReveal</li>
-            <li><a href="./index.html">Home page</a></li>
-            <li><a href="./getting-started.html">Getting Started</a></li>
-            <li><a href="./formatting.html">Formatting docs</a></li>
-            <li class="divider"></li>            
-            <li><a href="http://github.com/fsprojects/FsReveal">Source Code on GitHub</a></li>
-            <li><a href="./license.html">License</a></li>
-            <li><a href="./release-notes.html">Release Notes</a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-    <a href="http://github.com/fsprojects/FsReveal"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
-  </body>
-  </html>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        // Add the nohighlight class and data-noescape attribute to code elements that have already been formatted by FSharp.Formatting
+        $('pre.highlighted code').addClass('nohighlight').attr('data-noescape', '');
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>
+
